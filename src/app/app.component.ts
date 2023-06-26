@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpService } from './services/http.service';
+import { tap, map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'http-service';
+  colors$ = this.httpService.getStaticJsonFile$().pipe(
+    tap((colors) => console.log(colors))
+  );
+
+  constructor(
+    private readonly httpService: HttpService
+  ) {}
+
+
 }
